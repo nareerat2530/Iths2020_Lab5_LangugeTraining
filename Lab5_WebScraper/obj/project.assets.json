@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\naree\\RiderProjects\\Lab5_WebScraper\\Lab5_WebScraper\\Lab5_WebScraper.csproj",
+      "projectUniqueName": "C:\\Users\\naree\\source\\repos\\nareerat2530\\Iths2020_Lab5_WebScraper\\Lab5_WebScraper\\Lab5_WebScraper.csproj",
       "projectName": "Lab5_WebScraper",
-      "projectPath": "C:\\Users\\naree\\RiderProjects\\Lab5_WebScraper\\Lab5_WebScraper\\Lab5_WebScraper.csproj",
+      "projectPath": "C:\\Users\\naree\\source\\repos\\nareerat2530\\Iths2020_Lab5_WebScraper\\Lab5_WebScraper\\Lab5_WebScraper.csproj",
       "packagesPath": "C:\\Users\\naree\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\naree\\RiderProjects\\Lab5_WebScraper\\Lab5_WebScraper\\obj\\",
+      "outputPath": "C:\\Users\\naree\\source\\repos\\nareerat2530\\Iths2020_Lab5_WebScraper\\Lab5_WebScraper\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
