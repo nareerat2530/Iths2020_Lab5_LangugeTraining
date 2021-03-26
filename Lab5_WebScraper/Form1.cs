@@ -31,7 +31,7 @@ namespace Lab5_WebScraper
             UrlFoundLabl.Show();
             _imageUrls.Clear();
             ListBoxResult.DataSource = null;
-            var url = textBox.Text;          
+            var url = textBox.Text;
             await FindMatchRex(url);
         }
 
@@ -49,7 +49,8 @@ namespace Lab5_WebScraper
             var matches = UrlPattern.Matches(downloadHtml);
 
 
-            _imageUrls = matches.OfType<Match>().SelectMany(m => m.Groups[1].Value.Split(' ')).Distinct().Select(s => s.Contains("http") ? s : url + s).ToList();
+            _imageUrls = matches.OfType<Match>().SelectMany(m => m.Groups[1].Value.Split(' ')).Distinct()
+                .Select(s => s.Contains("http") ? s : url + s).ToList();
 
             ListBoxResult.DataSource = _imageUrls;
         }
@@ -103,7 +104,7 @@ namespace Lab5_WebScraper
                 await fs.WriteAsync(result, 0, result.Length);
                 i++;
                 TaskDictionary.Remove(completeTask);
-                DownloadedImageLabel.Text = $"{i} images have been downloaded";
+                DownloadedImageLabel.Text = $"{i-1} images have been downloaded";
             }
         }
 
@@ -111,7 +112,5 @@ namespace Lab5_WebScraper
         {
             UrlFoundLabl.Text = $"{ListBoxResult.Items.Count.ToString()} Images found";
         }
-
-
     }
 }
