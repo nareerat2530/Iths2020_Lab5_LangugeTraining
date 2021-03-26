@@ -18,6 +18,7 @@ namespace Lab5_WebScraper
             InitializeComponent();
             UrlPattern = new Regex("<img.*src=\"(.*?\\.(jpg|jpeg|png|gif|bmp).*?)\"");
             ImagePattern = new Regex("\\.(jpg|jpeg|png|gif|bmp)");
+            ListBoxResult.Text = "";
         }
 
         private Dictionary<Task<byte[]>, string> TaskDictionary { get; } = new();
@@ -27,8 +28,10 @@ namespace Lab5_WebScraper
 
         private async void ExtractButton_Click(object sender, EventArgs e)
         {
+            UrlFoundLabl.Show();
             _imageUrls.Clear();
-            var url = textBox.Text;
+            ListBoxResult.DataSource = null;
+            var url = textBox.Text;          
             await FindMatchRex(url);
         }
 
@@ -46,8 +49,7 @@ namespace Lab5_WebScraper
             var matches = UrlPattern.Matches(downloadHtml);
 
 
-            _imageUrls = matches.OfType<Match>().SelectMany(m => m.Groups[1].Value.Split(' ')).Distinct()
-                .Where(s => url.Any(a => !s.Contains(a))).Select(s => url + s).ToList();
+            _imageUrls = matches.OfType<Match>().SelectMany(m => m.Groups[1].Value.Split(' ')).Distinct().Select(s => s.Contains("http") ? s : url + s).ToList();
 
             ListBoxResult.DataSource = _imageUrls;
         }
@@ -56,6 +58,7 @@ namespace Lab5_WebScraper
         {
             var dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() != DialogResult.OK) return;
+
             await DownloadAndSaveImages(dialog.SelectedPath, _imageUrls.ToArray());
         }
 
@@ -72,6 +75,7 @@ namespace Lab5_WebScraper
 
         private async Task DownloadAndSaveImages(string path, string[] images)
         {
+            UrlFoundLabl.Hide();
             using var client = new HttpClient();
 
 
@@ -99,8 +103,15 @@ namespace Lab5_WebScraper
                 await fs.WriteAsync(result, 0, result.Length);
                 i++;
                 TaskDictionary.Remove(completeTask);
-                FoundImageLabel.Text = $"{i} images have been downloaded";
+                DownloadedImageLabel.Text = $"{i} images have been downloaded";
             }
         }
+
+        private void ListBoxResult_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UrlFoundLabl.Text = $"{ListBoxResult.Items.Count.ToString()} Images found";
+        }
+
+
     }
 }
