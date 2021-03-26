@@ -1,1 +1,1 @@
-# Iths2020_Lab5_LangugeTraining
+# Iths2020_Lab5_WebScraper
