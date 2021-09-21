@@ -1,1 +1,1 @@
-# Iths2020_Lab5_WebScraper
+# Web scraper for downloading images
